@@ -33,6 +33,12 @@ public class GetUserTest extends Endpoints {
     }
 
     @Test
+    public void testGetAllUsers() {
+        Response getAllUsers = getUsers();
+        getAllUsers.then().log().body();
+    }
+
+    @Test
     public void testGetUserAfterCreate() {
 
         Response userDataResponse = getUserByName(validUser.getName());

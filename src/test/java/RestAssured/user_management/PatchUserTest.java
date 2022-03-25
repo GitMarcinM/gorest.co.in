@@ -19,13 +19,12 @@ public class PatchUserTest extends Endpoints {
     public void setUp() throws Exception {
         validUser = new User(
                 "New User",
-                "test.email@ddress.com",
-                "male",
-                "active"
+                "test.email@address.com",
+                "female",
+                "inactive"
         );
         responseCreatedUser = createUser(validUser);
         userId = responseCreatedUser.jsonPath().getString("id");
-        validUser.setEmail(validUser.getEmail());
     }
 
     @After
@@ -37,15 +36,16 @@ public class PatchUserTest extends Endpoints {
     public void CreateGetPatchGetDeleteUser() {
 
         User updateUser = new User(
+                userId,
                 "Update User",
                 validUser.getEmail(),
-                "female",
-                "inactive"
+                "male",
+                "active"
         );
 
         Response getCreatedUser = getUserByName(validUser.getName());
 
-        patchUser(updateUser, userId);
+        patchUser(updateUser);
         Response getPatchedUser = getUserByName(updateUser.getName());
 
         User[] userFromResponse = getCreatedUser.getBody().as(User[].class);

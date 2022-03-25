@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 
 public class Endpoints {
 
-    public static final String ACCESS_TOKEN = "insert Bearer token here";
+    public static final String ACCESS_TOKEN = "eebd514ca76ddfb7e628131ec49a287d2b9b88fb52fe2046c376f655d22c94cf";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -61,12 +61,17 @@ public class Endpoints {
         return response;
     }
 
-    public static Response patchUser(User user, String userId) {
+    public static Response patchUser(User user) {
         RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json")
+        request.body("{" +
+                        "    \"name\" : \""+user.getName()+"\","+
+                        "    \"gender\" : \""+user.getGender()+"\","+
+                        "    \"status\" : \""+user.getStatus()+"\""+
+                        "}")
+                .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + ACCESS_TOKEN);
 
-        Response response = request.body(user).patch("/users/" + userId);
+        Response response = request.patch("/users/" + user.getId());
         return response;
     }
 }
