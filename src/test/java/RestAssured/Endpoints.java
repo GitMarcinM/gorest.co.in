@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 
 public class Endpoints {
 
-    public static final String ACCESS_TOKEN = "eebd514ca76ddfb7e628131ec49a287d2b9b88fb52fe2046c376f655d22c94cf";
+    public static final String ACCESS_TOKEN = "insert Bearer token here";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
