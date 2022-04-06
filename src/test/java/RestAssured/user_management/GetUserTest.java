@@ -18,10 +18,10 @@ public class GetUserTest extends Endpoints {
     @Before
     public void setUp() throws Exception {
         validUser = new User(
-                "testUserXd",
-                "testEmajl@testgmail.com",
-                "male",
-                "active"
+                "New User",
+                "test.email@address.com",
+                "female",
+                "inactive"
         );
         responseCreatedUser = createUser(validUser);
         userId = responseCreatedUser.jsonPath().getString("id");
