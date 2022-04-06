@@ -33,7 +33,7 @@ public class PatchUserTest extends Endpoints {
     }
 
     @Test
-    public void CreateGetPatchGetDeleteUser() {
+    public void testCreatePatchDeleteUser() {
 
         User updateUser = new User(
                 userId,

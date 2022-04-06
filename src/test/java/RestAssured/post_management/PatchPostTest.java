@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class GetPostTest extends EndpointsPosts {
+public class PatchPostTest extends EndpointsPosts {
 
     Response responseCreatedPost;
     String postId;
@@ -47,21 +47,30 @@ public class GetPostTest extends EndpointsPosts {
     }
 
     @Test
-    public void testGetAllPosts() {
-        Response getAllPosts = getPosts();
-        getAllPosts.then().log().body();
-    }
+    public void testCreatePatchDeletePost() {
 
-    @Test
-    public void testGetPostAfterCreate() {
+        Post updatePost = new Post(
+                postId,
+                newPost.getUser_id(),
+                "This is the title of post after update",
+                "This is the body of the post after update"
+        );
 
         Response postDataResponse = getPostByTitle(newPost.getTitle());
-        postDataResponse.then().log().body();
+
+        patchPost(updatePost);
+        Response getPatchedPost = getPostByTitle(updatePost.getTitle());
 
         Post[] postFromResponse = postDataResponse.getBody().as(Post[].class);
-        System.out.println(postFromResponse[0].toString());
+        System.out.println(postFromResponse[0]);
+
+        Post[] patchPostFromResponse = getPatchedPost.getBody().as(Post[].class);
+        System.out.println(patchPostFromResponse[0]);
 
         assertThat("New post should be the same as post from response",
                 postFromResponse[0].equals(newPost));
+
+        assertThat("Update post should be the same as post from response",
+                patchPostFromResponse[0].equals(updatePost));
     }
 }

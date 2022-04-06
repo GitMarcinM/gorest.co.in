@@ -16,12 +16,12 @@ public class EndpointsPosts extends Endpoints {
         return response;
     }
 
-    public static Response getPostByUserId(String userId) {
+    public static Response getPostByTitle(String title) {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + ACCESS_TOKEN);
 
-        Response response = request.get("/posts?user_id=" + userId);
+        Response response = request.get("/posts?title=" + title);
         return response;
     }
 
@@ -37,7 +37,7 @@ public class EndpointsPosts extends Endpoints {
     public static Response patchPost(Post post) {
         RequestSpecification request = RestAssured.given();
         request.body("{" +
-                        "    \"title\" : \" "+post.getTitle()+"\""+
+                        "    \"title\" : \""+post.getTitle()+"\","+
                         "    \"body\" : \""+post.getBody()+"\""+
                         "}")
                 .header("Content-Type", "application/json")
